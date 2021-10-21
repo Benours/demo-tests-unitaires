@@ -12,7 +12,12 @@ public class MaisonTest {
 		Maison maison = new Maison();
 		Piece[] pieces = {piece};
 		
-		maison.ajouterPiece(piece);
+		try {
+			maison.ajouterPiece(piece);
+		} catch (MaisonException e) {
+			// TODO Auto-generated catch block
+			e.getMessage();
+		}
 		assertEquals(pieces, maison.getPieces());
 	}
 	
@@ -20,8 +25,22 @@ public class MaisonTest {
 	public void testAjouterPieceNull() {
 		Maison maison = new Maison();
 		Piece[] pieces = {null};
-		
-		maison.ajouterPiece(null);
 		assertEquals(0, maison.getPieces().length);
+	}
+	
+	@Test
+	public void testPieceNegative() {
+		
+		Piece piece = new Cuisine(-10, 0);
+		Maison maison = new Maison();
+
+		Piece[] pieces = new Piece[0];
+		try {
+			maison.ajouterPiece(piece);
+		} catch (MaisonException e) {
+			// TODO Auto-generated catch block
+			e.getMessage();
+		}
+		assertEquals(pieces, maison.getPieces());
 	}
 }

@@ -9,9 +9,11 @@ public class Maison {
 		this.pieces = new Piece[0];
 	}
 
-	public void ajouterPiece(Piece piece) {
+	public void ajouterPiece(Piece piece) throws MaisonException {
 		if (piece == null)
-			System.err.println("Veuillez rentrer des donn�es valides!\n -- ERREUR : piece null");
+			System.err.println("Veuillez rentrer des donn�es valides!\n -- ERREUR : piece null");
+		else if (piece.getSuperficie() < 0)
+			throw new MaisonException("Superficie pièce négative");
 		else {
 			pieces = Arrays.copyOf(pieces, pieces.length + 1);
 			pieces[pieces.length - 1] = piece;
